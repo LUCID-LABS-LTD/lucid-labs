@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUCID LABS LTD — Banner Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    --bg:#0B0A08; --surface:#12100C; --text:#E8E2D4; --muted:#8A8272; --amber:#FFB000; --border:#2A2620;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#0e0d0a;font-family:'JetBrains Mono',monospace;color:var(--text);}
+  .app{display:flex;min-height:100vh;}
+  .sidebar{width:380px;flex:0 0 380px;background:var(--surface);border-right:1px solid var(--border);padding:24px;}
+  .brandline{font-size:11px;letter-spacing:0.14em;color:var(--amber);margin-bottom:4px;}
+  .h1{font-size:18px;font-weight:700;letter-spacing:0.04em;color:var(--text);margin:0 0 20px;}
+  .panel-heading{font-size:11px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:8px;margin:22px 0 16px;}
+  .field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+  .field label{font-size:10px;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;}
+  .field input{background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:13px;padding:8px 10px;border-radius:2px;}
+  .field input:focus{outline:none;border-color:var(--amber);}
+  .export-btn{width:100%;margin-top:8px;background:var(--amber);color:#1A1200;border:none;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:0.06em;padding:14px;cursor:pointer;border-radius:2px;text-transform:uppercase;}
+  .export-btn:hover{background:#ffc23d;}
+  .main{flex:1;overflow:auto;padding:48px;display:flex;flex-direction:column;gap:56px;align-items:center;background:repeating-linear-gradient(45deg,#0d0c09 0 12px,#0a0908 12px 24px);}
+  .frame-label{font-size:12px;color:var(--muted);letter-spacing:0.06em;margin-bottom:10px;text-align:center;}
+  .banner{position:relative;overflow:hidden;background:var(--bg);}
+  .banner::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);mix-blend-mode:overlay;}
+  .banner .row{position:relative;z-index:1;display:flex;align-items:center;height:100%;}
+  .headline{font-weight:800;text-transform:uppercase;letter-spacing:0.01em;white-space:nowrap;}
+  .amber-word{color:var(--amber);}
+  .corner{position:absolute;display:flex;align-items:center;gap:10px;z-index:1;}
+  .corner img{display:block;}
+  .corner .wm{font-weight:700;letter-spacing:0.09em;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="sidebar">
+    <div class="brandline">LUCID LABS LTD</div>
+    <div class="h1">Banner Generator</div>
+
+    <div class="panel-heading">LinkedIn cover — 1128×191</div>
+    <div class="field"><label>Headline — part 1</label><input id="li-part1" value="WE DON'T PROPOSE THE FUTURE. WE "></div>
+    <div class="field"><label>Headline — emphasis</label><input id="li-emph" value="BUILD"></div>
+    <div class="field"><label>Headline — part 2</label><input id="li-part2" value=" IT."></div>
+    <button class="export-btn" id="exportLi">Export PNG — 1128×191</button>
+
+    <div class="panel-heading">X header — 1500×500</div>
+    <div class="field"><label>Headline — part 1</label><input id="x-part1" value="WE DON'T PROPOSE THE FUTURE. WE "></div>
+    <div class="field"><label>Headline — emphasis</label><input id="x-emph" value="BUILD"></div>
+    <div class="field"><label>Headline — part 2</label><input id="x-part2" value=" IT."></div>
+    <button class="export-btn" id="exportX">Export PNG — 1500×500</button>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="frame-label">LinkedIn company cover — 1128 × 191</div>
+      <div class="banner" id="banner-li" style="width:1128px;height:191px;">
+        <div class="row" style="padding:0 56px;">
+          <div class="headline" id="li-headline" style="font-size:26px;"></div>
+        </div>
+        <div class="corner" style="right:44px;bottom:0;top:0;">
+          <img src="../logo/logo-mark.svg" style="width:26px;height:26px;">
+          <div class="wm" style="font-size:14px;">LUCID LABS <span style="color:var(--muted);font-weight:500;">LTD</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="frame-label">X (Twitter) header — 1500 × 500</div>
+      <div class="banner" id="banner-x" style="width:1500px;height:500px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;">
+        <img src="../logo/logo-mark.svg" style="width:64px;height:64px;position:relative;z-index:1;">
+        <div class="headline" id="x-headline" style="font-size:38px;position:relative;z-index:1;text-align:center;"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function buildHeadline(target, p1, emph, p2){
+    target.innerHTML = '';
+    const a = document.createElement('span'); a.textContent = p1;
+    const b = document.createElement('span'); b.className = 'amber-word'; b.textContent = emph;
+    const c = document.createElement('span'); c.textContent = p2;
+    target.appendChild(a); target.appendChild(b); target.appendChild(c);
+  }
+
+  function syncLi(){ buildHeadline(document.getElementById('li-headline'),
+    document.getElementById('li-part1').value, document.getElementById('li-emph').value, document.getElementById('li-part2').value); }
+  function syncX(){ buildHeadline(document.getElementById('x-headline'),
+    document.getElementById('x-part1').value, document.getElementById('x-emph').value, document.getElementById('x-part2').value); }
+
+  ['li-part1','li-emph','li-part2'].forEach(id => document.getElementById(id).addEventListener('input', syncLi));
+  ['x-part1','x-emph','x-part2'].forEach(id => document.getElementById(id).addEventListener('input', syncX));
+  syncLi(); syncX();
+
+  function exportBanner(elId, w, h, filename){
+    const original = document.getElementById(elId);
+    const clone = original.cloneNode(true);
+    clone.style.position = 'fixed';
+    clone.style.left = '-99999px';
+    clone.style.top = '0';
+    document.body.appendChild(clone);
+    html2canvas(clone, {width:w, height:h, scale:1}).then(canvas => {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      document.body.removeChild(clone);
+    });
+  }
+
+  document.getElementById('exportLi').addEventListener('click', () => exportBanner('banner-li', 1128, 191, 'lucid-labs-linkedin-cover.png'));
+  document.getElementById('exportX').addEventListener('click', () => exportBanner('banner-x', 1500, 500, 'lucid-labs-x-header.png'));
+</script>
+
+</body>
+</html>

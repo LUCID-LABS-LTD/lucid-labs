@@ -1,0 +1,675 @@
+<title>LUCID LABS LTD</title>
+<style>
+  :root {
+    --bg: #0b0a08;
+    --bg-2: #12100c;
+    --ink: #e8e2d4;
+    --muted: #8a8272;
+    --accent: #ffb000;
+    --accent-dim: rgba(255, 176, 0, 0.55);
+    --line: #2a2620;
+    --good: #3fbf6b;
+    --chip-built-bg: rgba(63, 191, 107, 0.12);
+    --chip-dev-bg: rgba(255, 176, 0, 0.10);
+    --chip-concept-bg: rgba(138, 130, 114, 0.12);
+    --mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f0ebdd;
+      --bg-2: #e9e3d2;
+      --ink: #26221a;
+      --muted: #6e675a;
+      --accent: #9a5b00;
+      --accent-dim: rgba(154, 91, 0, 0.55);
+      --line: #d5cdb8;
+      --good: #1e7a45;
+      --chip-built-bg: rgba(30, 122, 69, 0.10);
+      --chip-dev-bg: rgba(154, 91, 0, 0.10);
+      --chip-concept-bg: rgba(110, 103, 90, 0.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0a08;
+    --bg-2: #12100c;
+    --ink: #e8e2d4;
+    --muted: #8a8272;
+    --accent: #ffb000;
+    --accent-dim: rgba(255, 176, 0, 0.55);
+    --line: #2a2620;
+    --good: #3fbf6b;
+    --chip-built-bg: rgba(63, 191, 107, 0.12);
+    --chip-dev-bg: rgba(255, 176, 0, 0.10);
+    --chip-concept-bg: rgba(138, 130, 114, 0.12);
+  }
+  :root[data-theme="light"] {
+    --bg: #f0ebdd;
+    --bg-2: #e9e3d2;
+    --ink: #26221a;
+    --muted: #6e675a;
+    --accent: #9a5b00;
+    --accent-dim: rgba(154, 91, 0, 0.55);
+    --line: #d5cdb8;
+    --good: #1e7a45;
+    --chip-built-bg: rgba(30, 122, 69, 0.10);
+    --chip-dev-bg: rgba(154, 91, 0, 0.10);
+    --chip-concept-bg: rgba(110, 103, 90, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .mono { font-family: var(--mono); }
+
+  /* ── top bar ────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .brand { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  nav .brand .cursor { color: var(--accent); animation: blink 1.1s steps(1) infinite; }
+  nav .links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  nav .links a { color: var(--muted); text-transform: uppercase; }
+  nav .links a:hover { color: var(--accent); text-decoration: none; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── hero ───────────────────────────────── */
+  header {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  #ascii {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1.4rem;
+  }
+  .eyebrow b { color: var(--accent); font-weight: 600; }
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(1.9rem, 6vw, 4.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0 0 1.6rem;
+    text-wrap: balance;
+    font-weight: 700;
+    max-width: 16ch;
+  }
+  h1 .accent { color: var(--accent); }
+  .hero-sub {
+    max-width: 46ch;
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin: 0 0 2.4rem;
+  }
+  .hero-cta {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--accent);
+    transition: background 0.15s, color 0.15s;
+  }
+  .hero-cta:hover { background: transparent; color: var(--accent); text-decoration: none; }
+  .statusbar {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.55rem 1.25rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+  }
+  .statusbar .ok { color: var(--good); }
+
+  /* ── sections ───────────────────────────── */
+  main { width: min(1080px, 100%); margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 5.5rem 0 1rem; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.7rem;
+    margin-bottom: 2.2rem;
+  }
+  .sec-head .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+  }
+  h2 {
+    font-family: var(--mono);
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    letter-spacing: 0.01em;
+    margin: 0;
+    font-weight: 700;
+  }
+  .lede { max-width: 62ch; color: var(--muted); font-size: 1.02rem; }
+  .lede strong { color: var(--ink); }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ── proof cards ────────────────────────── */
+  .proof-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+  .proof {
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 1.5rem 1.5rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .proof-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .proof h3 { font-family: var(--mono); font-size: 1.05rem; margin: 0; letter-spacing: 0.02em; }
+  .proof p { margin: 0; color: var(--muted); max-width: 62ch; }
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .chip.built { color: var(--good); border-color: var(--good); background: var(--chip-built-bg); }
+  .chip.dev { color: var(--accent); border-color: var(--accent); background: var(--chip-dev-bg); }
+  .chip.concept { color: var(--muted); background: var(--chip-concept-bg); }
+  .schematic {
+    overflow-x: auto;
+    border-top: 1px dashed var(--line);
+    padding-top: 1rem;
+  }
+  .schematic pre {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--accent-dim);
+    margin: 0;
+    min-width: max-content;
+  }
+  .spec-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── domains bento ──────────────────────── */
+  .bento {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .dom {
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 1.4rem;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: border-color 0.2s;
+  }
+  .dom:nth-child(1), .dom:nth-child(2) { grid-column: span 3; }
+  .dom:hover { border-color: var(--accent); }
+  .dom .idx {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+  .dom h3 { font-family: var(--mono); font-size: 0.98rem; margin: 0; }
+  .dom p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+  .dom .glyph {
+    font-family: var(--mono);
+    color: var(--accent-dim);
+    font-size: 0.8rem;
+    margin-top: auto;
+    padding-top: 0.8rem;
+    white-space: pre;
+    overflow: hidden;
+  }
+  @media (max-width: 760px) {
+    .bento { grid-template-columns: 1fr; }
+    .dom, .dom:nth-child(1), .dom:nth-child(2) { grid-column: span 1; }
+  }
+  .roadnote {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 1.2rem;
+  }
+
+  /* ── stages ─────────────────────────────── */
+  .stages { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 760px) { .stages { grid-template-columns: 1fr; } }
+  .stage {
+    border: 1px solid var(--line);
+    padding: 1.4rem;
+    background: var(--bg-2);
+  }
+  .stage.current { border-color: var(--accent); }
+  .stage .idx {
+    font-family: var(--mono);
+    font-size: 1.6rem;
+    color: var(--line);
+    font-weight: 700;
+    display: block;
+  }
+  .stage.current .idx { color: var(--accent); }
+  .stage h3 { font-family: var(--mono); font-size: 0.95rem; margin: 0.4rem 0 0.5rem; letter-spacing: 0.06em; }
+  .stage p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+  .stage .now {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* ── contact / footer ───────────────────── */
+  .prompt {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+  .prompt .ps1 { color: var(--good); }
+  .prompt .out { color: var(--muted); }
+  .prompt a { word-break: break-all; }
+  footer {
+    margin-top: 5rem;
+    border-top: 1px solid var(--line);
+    padding: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    nav .brand .cursor { animation: none; }
+  }
+</style>
+
+<nav>
+  <span class="brand">LUCID_LABS:~$ <span class="cursor">▌</span></span>
+  <span class="links">
+    <a href="#proof">Proof</a>
+    <a href="#domains">Domains</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#contact">Contact</a>
+  </span>
+</nav>
+
+<header>
+  <canvas id="ascii" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow"><b>LUCID LABS LTD</b> · DEEP-TECH · NIGERIA</p>
+    <h1><span id="scramble1">WE DON'T PROPOSE</span><br><span id="scramble2">THE FUTURE.</span><br><span class="accent" id="scramble3">WE BUILD IT.</span></h1>
+    <p class="hero-sub">Automation, autonomy, and intelligent infrastructure — designed, prototyped, and proven in Nigeria. Every claim on this page is something we can demonstrate.</p>
+    <a class="hero-cta" href="#proof">./view --proof</a>
+  </div>
+  <div class="statusbar">
+    <span><span class="ok">●</span> SYS ONLINE</span>
+    <span id="clock">--:--:-- WAT</span>
+    <span>STAGE 01 / PROVE</span>
+  </div>
+</header>
+
+<main>
+  <section id="about" class="reveal">
+    <div class="sec-head">
+      <span class="tag">[00]</span>
+      <h2>THESIS</h2>
+    </div>
+    <p class="lede">Nigeria's automation, autonomy, and intelligent infrastructure should be engineered at home. <strong>Lucid Labs exists to be the engine of that future</strong> — we build working systems first, demonstrate them publicly, and let the hardware speak before the pitch deck does.</p>
+  </section>
+
+  <section id="proof" class="reveal">
+    <div class="sec-head">
+      <span class="tag">[01]</span>
+      <h2>PROOF OF BUILD</h2>
+    </div>
+    <div class="proof-grid">
+      <article class="proof">
+        <div class="proof-top">
+          <h3>SENTINEL TANK V3.0</h3>
+          <span class="chip built">Built &amp; demonstrated</span>
+        </div>
+        <p>An autonomous patrol robot engineered from the ground up — sensor fusion, odometry, and full remote command from a custom Android app. This machine exists, drives, and patrols today.</p>
+        <div class="spec-row">
+          <span>MCU: ESP32-S3</span>
+          <span>NAV: IMU + Odometry</span>
+          <span>CTRL: Android App</span>
+        </div>
+        <div class="schematic"><pre>
+┌───────────────┐         ┌────────────────┐
+│  ESP32-S3 MCU │◄───────►│  IMU / ODOMETRY│
+└───────┬───────┘         └────────────────┘
+        │ wireless link
+┌───────┴───────┐         ┌────────────────┐
+│  ANDROID APP  │         │  DRIVE + PATROL│
+│  (command)    │────────►│  SUBSYSTEM     │
+└───────────────┘         └────────────────┘</pre></div>
+      </article>
+
+      <article class="proof">
+        <div class="proof-top">
+          <h3>CHILD-PROXIMITY SAFETY DEVICE</h3>
+          <span class="chip dev">In development</span>
+        </div>
+        <p>A BLE wearable that alerts a parent's phone the moment a child drifts out of safe range. Flagship product #1 — hardware and companion app currently in active development.</p>
+        <div class="spec-row">
+          <span>MCU: ESP32</span>
+          <span>LINK: BLE</span>
+          <span>APP: Parent Mobile</span>
+        </div>
+      </article>
+
+      <article class="proof">
+        <div class="proof-top">
+          <h3>VOICE-DRIVEN DESIGN PLATFORM</h3>
+          <span class="chip concept">Concept</span>
+        </div>
+        <p>An AI platform for real-time clothing design driven by voice. Early concept stage — listed here because we publish where things really are, not where we wish they were.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="domains" class="reveal">
+    <div class="sec-head">
+      <span class="tag">[02]</span>
+      <h2>SOLUTION DOMAINS</h2>
+    </div>
+    <div class="bento">
+      <div class="dom">
+        <span class="idx">DOM-01</span>
+        <h3>Infrastructure Automation</h3>
+        <p>Traffic systems, power and network grids that manage themselves — city-scale automation for the backbone of daily life.</p>
+        <span class="glyph">═╦═╦═╦═╦═╦═</span>
+      </div>
+      <div class="dom">
+        <span class="idx">DOM-02</span>
+        <h3>Autonomous Mobility</h3>
+        <p>Self-driving cars, autonomous buses, and automated rail engineered for Nigerian roads and Nigerian realities.</p>
+        <span class="glyph">»»»»»»»»»»»</span>
+      </div>
+      <div class="dom">
+        <span class="idx">DOM-03</span>
+        <h3>Agricultural Autonomy</h3>
+        <p>Autonomous trucks and machinery that plant, tend, and haul — scaling farms without scaling labor.</p>
+        <span class="glyph">↟ ↟ ↟ ↟ ↟ ↟</span>
+      </div>
+      <div class="dom">
+        <span class="idx">DOM-04</span>
+        <h3>Security Systems</h3>
+        <p>Patrol drones and autonomous ground robots for surveillance and protection — the Sentinel line starts here.</p>
+        <span class="glyph">◉ ─ ─ ─ ◉ ─</span>
+      </div>
+      <div class="dom">
+        <span class="idx">DOM-05</span>
+        <h3>AI Software Platforms</h3>
+        <p>Consumer and enterprise AI products — intelligence delivered as software, funding the hardware frontier.</p>
+        <span class="glyph">{ } { } { } {</span>
+      </div>
+    </div>
+    <p class="roadnote">// long-term roadmap — active builds are listed under [01] PROOF OF BUILD</p>
+  </section>
+
+  <section id="roadmap" class="reveal">
+    <div class="sec-head">
+      <span class="tag">[03]</span>
+      <h2>STAGED STRATEGY</h2>
+    </div>
+    <div class="stages">
+      <div class="stage current">
+        <span class="now">● current stage</span>
+        <span class="idx">01</span>
+        <h3>PROVE</h3>
+        <p>Build credibility assets: working prototypes, simulations, public demonstrations. No unverifiable claims — ever.</p>
+      </div>
+      <div class="stage">
+        <span class="idx">02</span>
+        <h3>FUND</h3>
+        <p>Secure government partnerships, grants, and investment on demonstrated proof — not promises.</p>
+      </div>
+      <div class="stage">
+        <span class="idx">03</span>
+        <h3>DEPLOY</h3>
+        <p>Roll out real autonomous and automated systems across Nigeria, at national scale.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <div class="sec-head">
+      <span class="tag">[04]</span>
+      <h2>CONTACT</h2>
+    </div>
+    <div class="prompt">
+      <div><span class="ps1">lucid@labs:~$</span> contact --founder</div>
+      <div class="out">&gt; Udegbe Chidiebere Emmanuel — Founder / CEO</div>
+      <div class="out">&gt; mail: <a href="mailto:contact@lucidlabs.example">contact@lucidlabs.example</a></div>
+      <div class="out">&gt; open to: demos · partnerships · pilot programs</div>
+      <div><span class="ps1">lucid@labs:~$</span> <span style="color:var(--accent)">▌</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>LUCID LABS LTD — NIGERIA</span>
+  <span>INCORPORATION IN PROGRESS · CAC NAME RESERVED</span>
+  <span>© 2026</span>
+</footer>
+
+<script>
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── ASCII torus hero ── */
+  var canvas = document.getElementById("ascii");
+  var ctx = canvas.getContext("2d");
+  var CHARS = ".,-~:;=!*#$@";
+  var cellW = 9, cellH = 16, cols = 0, rows = 0;
+  var A = 1.0, B = 0.4;
+  var accentDim = "rgba(255,176,0,0.5)";
+
+  function readTheme() {
+    var c = getComputedStyle(document.documentElement).getPropertyValue("--accent-dim").trim();
+    if (c) accentDim = c;
+  }
+  readTheme();
+  new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", readTheme);
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.font = "600 14px " + getComputedStyle(document.body).getPropertyValue("--mono");
+    cellW = ctx.measureText("@").width;
+    cellH = 16;
+    cols = Math.max(10, Math.floor(w / cellW));
+    rows = Math.max(10, Math.floor(h / cellH));
+  }
+
+  function frame() {
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = accentDim;
+    ctx.textBaseline = "top";
+    ctx.font = "600 14px " + getComputedStyle(document.body).getPropertyValue("--mono");
+
+    var buf = new Array(cols * rows).fill(" ");
+    var zbuf = new Float32Array(cols * rows);
+    var R1 = 1, R2 = 2, K2 = 5;
+    var scale = Math.min(cols * cellW, rows * cellH) / (cellW * 8);
+    var K1 = scale * K2 * 3 / (8 * (R1 + R2)) * cellW / 2 * 1.6;
+    // center: push torus right of the headline on wide screens
+    var cx = cols * (w > 900 ? 0.72 : 0.5);
+    var cy = rows * (w > 900 ? 0.5 : 0.72);
+
+    var cA = Math.cos(A), sA = Math.sin(A), cB = Math.cos(B), sB = Math.sin(B);
+    for (var j = 0; j < 6.28; j += 0.07) {
+      var ct = Math.cos(j), st = Math.sin(j);
+      for (var i = 0; i < 6.28; i += 0.02) {
+        var sp = Math.sin(i), cp = Math.cos(i);
+        var circx = R2 + R1 * ct, circy = R1 * st;
+        var x = circx * (cB * cp + sA * sB * sp) - circy * cA * sB;
+        var y = circx * (sB * cp - sA * cB * sp) + circy * cA * cB;
+        var z = K2 + cA * circx * sp + circy * sA;
+        var ooz = 1 / z;
+        var xp = Math.floor(cx + K1 * ooz * x / cellW * 2);
+        var yp = Math.floor(cy - K1 * ooz * y / cellH * 2);
+        if (xp < 0 || xp >= cols || yp < 0 || yp >= rows) continue;
+        var L = cp * ct * sB - cA * ct * sp - sA * st + cB * (cA * st - ct * sA * sp);
+        if (L > 0) {
+          var idx = xp + yp * cols;
+          if (ooz > zbuf[idx]) {
+            zbuf[idx] = ooz;
+            buf[idx] = CHARS[Math.max(0, Math.min(11, Math.floor(L * 8)))];
+          }
+        }
+      }
+    }
+    for (var r = 0; r < rows; r++) {
+      var line = buf.slice(r * cols, (r + 1) * cols).join("");
+      if (line.trim()) ctx.fillText(line, 0, r * cellH);
+    }
+  }
+
+  var last = 0;
+  function loop(t) {
+    if (t - last > 40) { // ~25fps is plenty and battery-friendly
+      A += 0.05; B += 0.025;
+      frame();
+      last = t;
+    }
+    requestAnimationFrame(loop);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  if (reduced) { frame(); } else { requestAnimationFrame(loop); }
+
+  /* ── scramble-in headline ── */
+  var GLYPHS = "!<>-_\\/[]{}—=+*^?#@";
+  function scramble(el, delay) {
+    var target = el.textContent;
+    if (reduced) return;
+    var frameN = 0, total = 26;
+    el.textContent = "";
+    setTimeout(function tick() {
+      frameN++;
+      var solved = Math.floor(target.length * frameN / total);
+      var out = target.slice(0, solved);
+      for (var i = solved; i < target.length; i++) {
+        out += target[i] === " " ? " " : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      }
+      el.textContent = out;
+      if (frameN < total) setTimeout(tick, 34);
+      else el.textContent = target;
+    }, delay);
+  }
+  scramble(document.getElementById("scramble1"), 100);
+  scramble(document.getElementById("scramble2"), 450);
+  scramble(document.getElementById("scramble3"), 850);
+
+  /* ── clock (WAT) ── */
+  var clock = document.getElementById("clock");
+  function tickClock() {
+    var now = new Date();
+    var wat = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Africa/Lagos", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+    }).format(now);
+    clock.textContent = wat + " WAT";
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+
+  /* ── scroll reveal ── */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+})();
+</script>

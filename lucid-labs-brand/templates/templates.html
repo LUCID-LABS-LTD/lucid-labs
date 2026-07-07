@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUCID LABS LTD — Social Template Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    --bg:#0B0A08; --surface:#12100C; --text:#E8E2D4; --muted:#8A8272; --amber:#FFB000; --border:#2A2620; --green:#3FBF6B;
+    --p-bg:#F0EBDD; --p-surface:#E9E3D2; --p-text:#26221A; --p-muted:#6E675A; --p-amber:#9A5B00; --p-border:#D5CDB8; --p-green:#1E7A45;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#08070500;background-color:#0e0d0a;font-family:'JetBrains Mono',monospace;color:var(--text);}
+  .app{display:flex;height:100vh;overflow:hidden;}
+
+  /* ---- sidebar ---- */
+  .sidebar{width:380px;flex:0 0 380px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:24px;}
+  .brandline{font-size:11px;letter-spacing:0.14em;color:var(--amber);margin-bottom:4px;}
+  .h1{font-size:18px;font-weight:700;letter-spacing:0.04em;color:var(--text);margin:0 0 20px;}
+  .tabs{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;}
+  .tab-btn{text-align:left;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:inherit;font-size:12px;letter-spacing:0.05em;padding:10px 12px;cursor:pointer;border-radius:2px;}
+  .tab-btn.active{border-color:var(--amber);color:var(--amber);background:rgba(255,176,0,0.06);}
+  .tab-btn:hover{color:var(--text);}
+  .field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+  .field label{font-size:10px;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;}
+  .field input, .field textarea{
+    background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:inherit; font-size:13px;
+    padding:8px 10px; border-radius:2px; resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{outline:none;border-color:var(--amber);}
+  .panel-heading{font-size:11px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:16px;}
+  .export-btn{
+    width:100%;margin-top:8px;background:var(--amber);color:#1A1200;border:none;font-family:inherit;font-weight:700;
+    font-size:13px;letter-spacing:0.06em;padding:14px;cursor:pointer;border-radius:2px;text-transform:uppercase;
+  }
+  .export-btn:hover{background:#ffc23d;}
+  .note{font-size:11px;color:var(--muted);line-height:1.6;margin-top:18px;border-top:1px solid var(--border);padding-top:14px;}
+
+  /* ---- preview stage ---- */
+  .stage{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;background:
+    repeating-linear-gradient(45deg, #0d0c09 0 12px, #0a0908 12px 24px);}
+  .frame{width:460px;height:460px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.6);}
+  .canvas1080{width:1080px;height:1080px;transform:scale(0.4259);transform-origin:top left;position:relative;}
+
+  /* ---- shared template chrome ---- */
+  .tpl{width:1080px;height:1080px;position:relative;overflow:hidden;display:none;}
+  .tpl.active{display:block;}
+  .scanlines::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
+    mix-blend-mode:overlay;
+  }
+  .mark{position:absolute;display:flex;align-items:center;gap:14px;}
+  .mark img{width:34px;height:34px;}
+  .mark .wm{font-size:15px;font-weight:700;letter-spacing:0.1em;}
+  .amber-word{color:var(--amber);}
+  .paper .amber-word{color:var(--p-amber);}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <div class="sidebar">
+    <div class="brandline">LUCID LABS LTD</div>
+    <div class="h1">Social Template Generator</div>
+
+    <div class="tabs" id="tabs"></div>
+
+    <div class="panel-heading">Edit content</div>
+    <div id="fields"></div>
+
+    <button class="export-btn" id="exportBtn">Export PNG — 1080×1080</button>
+
+    <div class="note">Edit any field above, then export. Kicker/title-bar defaults match brand spec exactly — change only if you know what you're doing. Amber is emphasis-only (~10% max); green is reserved for "BUILT" chips.</div>
+  </div>
+
+  <!-- ============ PREVIEW STAGE ============ -->
+  <div class="stage">
+    <div class="frame">
+      <div class="canvas1080" id="canvasWrap">
+
+        <!-- (a) ANNOUNCEMENT -->
+        <div class="tpl scanlines active" id="tpl-announcement" style="background:var(--bg);">
+          <div style="position:absolute;top:64px;left:64px;font-size:16px;letter-spacing:0.14em;color:var(--amber);" data-field="Kicker" data-tpl="announcement">LUCID LABS LTD · DEEP-TECH · NIGERIA</div>
+          <div style="position:absolute;left:64px;top:340px;right:120px;font-size:64px;font-weight:800;line-height:1.18;letter-spacing:0.01em;text-transform:uppercase;">
+            <span data-field="Headline — part 1" data-tpl="announcement">NIGERIA'S FIRST </span><span class="amber-word" data-field="Headline — emphasis" data-tpl="announcement">AUTONOMOUS</span><span data-field="Headline — part 2" data-tpl="announcement"> DELIVERY FLEET IS LIVE.</span>
+          </div>
+          <div style="position:absolute;left:64px;top:640px;right:160px;font-size:22px;color:var(--muted);line-height:1.6;" data-field="Subcopy" data-tpl="announcement">Built end-to-end in Lagos — navigation, power, and fleet control, engineered from zero.</div>
+          <div class="mark" style="right:64px;bottom:56px;">
+            <img src="../logo/logo-mark.svg" alt="">
+            <div class="wm">LUCID LABS <span style="color:var(--muted);font-weight:500;">LTD</span></div>
+          </div>
+        </div>
+
+        <!-- (b) BUILD LOG -->
+        <div class="tpl scanlines" id="tpl-buildlog" style="background:var(--bg);">
+          <div style="position:absolute;left:64px;top:64px;right:64px;bottom:64px;border:1px solid var(--border);border-radius:6px;background:var(--surface);display:flex;flex-direction:column;overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:10px;padding:18px 22px;border-bottom:1px solid var(--border);">
+              <div style="width:13px;height:13px;border-radius:50%;background:#5A5548;"></div>
+              <div style="width:13px;height:13px;border-radius:50%;background:#5A5548;"></div>
+              <div style="width:13px;height:13px;border-radius:50%;background:#5A5548;"></div>
+              <div style="flex:1;text-align:center;font-size:16px;color:var(--muted);letter-spacing:0.04em;" data-field="Title bar text" data-tpl="buildlog">lucidlabs-ltd — build.log</div>
+            </div>
+            <div style="padding:34px 40px 0 40px;font-size:19px;line-height:2.1;">
+              <div><span style="color:var(--amber);">$</span> <span data-field="Command line 1" data-tpl="buildlog">flash --target=wearable-v3</span></div>
+              <div><span style="color:var(--amber);">$</span> <span data-field="Command line 2" data-tpl="buildlog">run drop_test.sim --height=2m</span></div>
+              <div><span style="color:var(--amber);">$</span> <span data-field="Command line 3" data-tpl="buildlog">status: PASS — 0 faults</span></div>
+            </div>
+            <div style="flex:1;margin:26px 40px 0 40px;border:1px dashed var(--border);border-radius:4px;background:repeating-linear-gradient(135deg, rgba(255,176,0,0.05) 0 14px, transparent 14px 28px);display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:13px;letter-spacing:0.08em;color:var(--muted);">[ BUILD PHOTO — DROP IMAGE HERE ]</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:20px 40px 26px 40px;font-size:14px;color:var(--muted);">
+              <div data-field="Date stamp" data-tpl="buildlog">2026.07.07 // LAGOS, NG</div>
+              <div style="display:flex;align-items:center;gap:8px;"><img src="../logo/logo-mark.svg" style="width:18px;height:18px;" alt=""><span style="letter-spacing:0.08em;">LUCID LABS LTD</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- (c) MILESTONE -->
+        <div class="tpl scanlines" id="tpl-milestone" style="background:var(--bg);">
+          <div style="position:absolute;top:64px;left:64px;font-size:16px;letter-spacing:0.14em;color:var(--amber);">LUCID LABS LTD · MILESTONE</div>
+          <div style="position:absolute;left:64px;top:150px;right:120px;font-size:46px;font-weight:800;line-height:1.25;text-transform:uppercase;" data-field="Title" data-tpl="milestone">Wearable V3 — Drop Test</div>
+          <div style="position:absolute;left:64px;top:400px;display:flex;gap:16px;">
+            <div style="border:1px solid var(--amber);color:var(--amber);font-size:15px;letter-spacing:0.1em;padding:10px 20px;border-radius:20px;" data-field="Amber chip label" data-tpl="milestone">IN PROGRESS</div>
+            <div style="border:1px solid var(--green);color:var(--green);font-size:15px;letter-spacing:0.1em;padding:10px 20px;border-radius:20px;" data-field="Green chip label" data-tpl="milestone">BUILT</div>
+          </div>
+          <div style="position:absolute;left:64px;top:520px;right:64px;font-size:38px;letter-spacing:0.04em;color:var(--amber);" data-field="ASCII progress bar" data-tpl="milestone">████████████░░░░░░░░ 62%</div>
+          <div style="position:absolute;left:64px;top:610px;right:140px;font-size:20px;color:var(--muted);line-height:1.6;" data-field="Description" data-tpl="milestone">Structural + waterproof pass complete. Firmware validation next.</div>
+          <div class="mark" style="right:64px;bottom:56px;">
+            <img src="../logo/logo-mark.svg" alt="">
+            <div class="wm">LUCID LABS <span style="color:var(--muted);font-weight:500;">LTD</span></div>
+          </div>
+        </div>
+
+        <!-- (d) QUOTE / VISION -->
+        <div class="tpl scanlines" id="tpl-quote" style="background:var(--bg);">
+          <div style="position:absolute;left:110px;top:230px;font-size:120px;font-weight:800;color:var(--amber);line-height:1;">&#8220;</div>
+          <div style="position:absolute;left:110px;right:110px;top:400px;font-size:48px;font-weight:700;line-height:1.35;text-align:center;">
+            <span data-field="Quote — part 1" data-tpl="quote">Safety is not a feature we add. It is </span><span class="amber-word" data-field="Quote — emphasis" data-tpl="quote">the system we build.</span>
+          </div>
+          <div style="position:absolute;left:0;right:0;top:700px;text-align:center;font-size:19px;letter-spacing:0.06em;color:var(--muted);" data-field="Attribution" data-tpl="quote">— LUCID LABS LTD</div>
+          <div class="mark" style="right:64px;bottom:56px;">
+            <img src="../logo/logo-mark.svg" alt="">
+            <div class="wm">LUCID LABS <span style="color:var(--muted);font-weight:500;">LTD</span></div>
+          </div>
+        </div>
+
+        <!-- (e) PRODUCT UPDATE — PAPER THEME -->
+        <div class="tpl paper" id="tpl-product" style="background:var(--p-bg);color:var(--p-text);">
+          <div style="position:absolute;top:64px;left:64px;font-size:16px;letter-spacing:0.14em;color:var(--p-amber);" data-field="Kicker" data-tpl="product">LUCID LABS LTD · PRODUCT UPDATE</div>
+          <div style="position:absolute;left:64px;top:220px;right:120px;font-size:52px;font-weight:800;line-height:1.25;">
+            <span data-field="Headline — part 1" data-tpl="product">A gentler way to keep </span><span class="amber-word" data-field="Headline — emphasis" data-tpl="product">watch</span><span data-field="Headline — part 2" data-tpl="product"> over your child.</span>
+          </div>
+          <div style="position:absolute;left:64px;top:520px;right:150px;font-size:22px;line-height:1.7;color:var(--p-muted);" data-field="Body copy" data-tpl="product">The wearable now alerts a parent's phone within 2 seconds of a geofence exit — reviewed with three paediatric safety boards before shipping.</div>
+          <div style="position:absolute;left:64px;bottom:56px;display:flex;align-items:center;gap:14px;">
+            <img src="../logo/logo-mark-light.svg" style="width:34px;height:34px;" alt="">
+            <div style="font-size:15px;font-weight:700;letter-spacing:0.1em;">LUCID LABS <span style="color:var(--p-muted);font-weight:500;">LTD</span></div>
+          </div>
+          <div style="position:absolute;right:64px;bottom:60px;font-size:13px;letter-spacing:0.06em;color:var(--p-muted);" data-field="Footer tag" data-tpl="product">v3.1 · CHILD SAFETY UPDATE</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const TEMPLATES = [
+    {id:'announcement', label:'(a) Announcement'},
+    {id:'buildlog', label:'(b) Build log'},
+    {id:'milestone', label:'(c) Milestone'},
+    {id:'quote', label:'(d) Quote / vision'},
+    {id:'product', label:'(e) Product update — paper'},
+  ];
+  let active = 'announcement';
+
+  const tabsEl = document.getElementById('tabs');
+  const fieldsEl = document.getElementById('fields');
+
+  function renderTabs(){
+    tabsEl.innerHTML = '';
+    TEMPLATES.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn' + (t.id === active ? ' active' : '');
+      btn.textContent = t.label;
+      btn.onclick = () => { active = t.id; showActive(); };
+      tabsEl.appendChild(btn);
+    });
+  }
+
+  function showActive(){
+    document.querySelectorAll('.tpl').forEach(el => el.classList.remove('active'));
+    document.getElementById('tpl-' + active).classList.add('active');
+    renderTabs();
+    renderFields();
+  }
+
+  function renderFields(){
+    fieldsEl.innerHTML = '';
+    const scope = document.querySelectorAll('[data-tpl="' + active + '"]');
+    scope.forEach((el, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'field';
+      const lab = document.createElement('label');
+      lab.textContent = el.dataset.field;
+      const long = el.textContent.length > 40;
+      const input = document.createElement(long ? 'textarea' : 'input');
+      if (!long) input.type = 'text';
+      else input.rows = 3;
+      input.value = el.textContent;
+      input.addEventListener('input', () => { el.textContent = input.value; });
+      wrap.appendChild(lab);
+      wrap.appendChild(input);
+      fieldsEl.appendChild(wrap);
+    });
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    const original = document.getElementById('tpl-' + active);
+    const clone = original.cloneNode(true);
+    clone.classList.add('active');
+    clone.style.transform = 'none';
+    clone.style.position = 'fixed';
+    clone.style.left = '-99999px';
+    clone.style.top = '0';
+    clone.style.display = 'block';
+    document.body.appendChild(clone);
+    html2canvas(clone, {width:1080, height:1080, scale:1, backgroundColor:null}).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'lucid-labs-' + active + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      document.body.removeChild(clone);
+    });
+  });
+
+  renderTabs();
+  renderFields();
+</script>
+
+</body>
+</html>
