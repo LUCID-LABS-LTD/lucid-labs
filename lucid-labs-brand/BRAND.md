@@ -48,7 +48,9 @@ Status green appears **only** on a "BUILT" status chip or an online/status indic
 
 ## 6. Typography
 
-Monospace throughout, no exceptions — headlines, body, UI chrome.
+Monospace for headlines, wordmarks, labels, chips, nav, and all UI chrome.
+
+**Exception — long-form body copy on the web:** paragraphs and running text on websites may use a clean system sans-serif for readability. Monospace body is reserved for short strings (specs, terminal blocks, captions). Decision: founder, 2026-07-07 — readability takes priority over aesthetic purity in body copy.
 
 - **JetBrains Mono** (primary) — `https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap`
 - **IBM Plex Mono** (fallback / alternate weight range) — `https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap`
