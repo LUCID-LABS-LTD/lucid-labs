@@ -18,9 +18,13 @@ async function main() {
   let ws;
   try {
     const portFile = path.join(profile, 'DevToolsActivePort');
-    for(let i=0; i<100 && !fs.existsSync(portFile); i++) await sleep(100);
-    assert.ok(fs.existsSync(portFile), 'Edge did not start');
-    const port = fs.readFileSync(portFile, 'utf8').split(/\r?\n/)[0];
+    let port;
+    for(let i=0; i<100 && !port; i++) {
+      try { port=fs.readFileSync(portFile, 'utf8').split(/\r?\n/)[0]; }
+      catch(error) { if(!['ENOENT','EBUSY','EACCES'].includes(error.code)) throw error; }
+      if(!port) await sleep(100);
+    }
+    assert.ok(port, 'Edge did not start');
     const target = await (await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, {method:'PUT'})).json();
     ws = new WebSocket(target.webSocketDebuggerUrl);
     await new Promise((resolve,reject) => {ws.onopen=resolve; ws.onerror=reject;});
@@ -57,6 +61,9 @@ async function main() {
       if(width===320&&height===850) await screenshot('menu-320');
       assert.equal(await evaluate("document.querySelector('#menuToggle').getAttribute('aria-expanded')"),'true','menu opens and updates ARIA');
       assert.notEqual(await evaluate("getComputedStyle(document.querySelector('#siteNavigation')).display"),'none','mobile links appear');
+      assert.equal(await evaluate("document.querySelector('#siteNavigation a[href=\"https://agentscreator.lucidlabsltd.com/\"]').href"),'https://agentscreator.lucidlabsltd.com/','mobile menu links to Agent Creator');
+      assert.ok(await evaluate(`(()=>{const a=document.querySelector('#siteNavigation a[href="https://agentscreator.lucidlabsltd.com/"]').getBoundingClientRect();return a.width>0&&a.height>=44&&a.left>=0&&a.right<=innerWidth})()`),'mobile creator link is visible and touch-friendly');
+      assert.ok(await evaluate(`(()=>{const a=document.querySelector('#proof a[href="https://agentscreator.lucidlabsltd.com/"]').getBoundingClientRect();return a.width>0&&a.left>=0&&a.right<=innerWidth+1})()`),'creator card link fits mobile viewport');
       await evaluate("document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}))");
       assert.equal(await evaluate("document.querySelector('#menuToggle').getAttribute('aria-expanded')"),'false','Escape closes menu');
       await evaluate("document.querySelector('#menuToggle').click(); document.querySelector('#siteNavigation a[href=\"#proof\"]').click()");
@@ -66,11 +73,19 @@ async function main() {
       assert.equal(await evaluate("document.documentElement.dataset.theme"),'light','theme toggle works on mobile');
       assert.equal(await evaluate("document.querySelector('meta[name=theme-color]').content"),'#f0ebdd','browser theme follows selection');
     }
+    for (const width of [761,800,900,1024]) {
+      await send('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false});
+      await send('Page.navigate',{url:page});
+      await waitFor("document.readyState==='complete' && document.querySelector('nav.menu-ready')");
+      assert.ok(await evaluate(`(()=>{const nav=document.querySelector('nav').getBoundingClientRect(),hero=document.querySelector('.hero-inner').getBoundingClientRect(),links=[...document.querySelectorAll('#siteNavigation a, #themeToggle')];return nav.left>=0&&nav.right<=innerWidth&&hero.top>=nav.bottom-1&&links.every(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.left>=nav.left-1&&r.right<=nav.right+1&&r.top>=nav.top-1&&r.bottom<=nav.bottom+1})})()`), `desktop nav or hero overlaps or clips at ${width}px`);
+      assert.ok(await evaluate(`(()=>{const rs=[...document.querySelectorAll('nav .brand, #siteNavigation a, #themeToggle')].map(e=>e.getBoundingClientRect());return rs.every((a,i)=>rs.slice(i+1).every(b=>a.right<=b.left+1||b.right<=a.left+1||a.bottom<=b.top+1||b.bottom<=a.top+1))})()`), `desktop navigation items overlap at ${width}px`);
+    }
     await send('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false});
     await send('Page.navigate',{url:page});
     await waitFor("document.readyState==='complete' && document.querySelector('nav.menu-ready')");
     assert.equal(await evaluate("getComputedStyle(document.querySelector('#menuToggle')).display"),'none','mobile toggle hidden on desktop');
     assert.notEqual(await evaluate("getComputedStyle(document.querySelector('#siteNavigation')).display"),'none','desktop links visible');
+    assert.ok(await evaluate(`(()=>{const a=document.querySelector('#siteNavigation a[href="https://agentscreator.lucidlabsltd.com/"]').getBoundingClientRect();return a.width>0&&a.left>=0&&a.right<=innerWidth})()`),'desktop creator link is visible');
     assert.ok(await evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth'),'desktop page should not overflow');
     console.log('Company website responsive browser checks passed');
   } finally {
