@@ -87,6 +87,7 @@ async function main() {
     assert.notEqual(await evaluate("getComputedStyle(document.querySelector('#siteNavigation')).display"),'none','desktop links visible');
     assert.ok(await evaluate(`(()=>{const a=document.querySelector('#siteNavigation a[href="https://agentscreator.lucidlabsltd.com/"]').getBoundingClientRect();return a.width>0&&a.left>=0&&a.right<=innerWidth})()`),'desktop creator link is visible');
     assert.ok(await evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth'),'desktop page should not overflow');
+    assert.equal(await evaluate("document.querySelector('#divisions a[href=\"/creative/\"]')?.textContent.includes('lucid-creative')"),true,'DIV-03 links to the Lucid Creative page');
     console.log('Company website responsive browser checks passed');
   } finally {
     if(ws) ws.close();

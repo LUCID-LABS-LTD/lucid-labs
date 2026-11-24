@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucid Creative — Short-Form Video Ads for DTC Brands</title>
+  <meta name="description" content="Lucid Creative edits short-form, UGC and AI UGC video ads for DTC brands. A steady weekly supply of ads for Meta, TikTok and YouTube Shorts. Start with a free spec cut.">
+  <meta name="theme-color" content="#f0ebdd">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://lucidlabsltd.com/creative/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta property="og:title" content="Lucid Creative — Fresh ad creative. Every week. On schedule.">
+  <meta property="og:description" content="Short-form, UGC and AI UGC video ads for DTC brands, ready to launch on Meta, TikTok and YouTube Shorts. Claim a free spec cut: three new hooks in 72 hours.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lucidlabsltd.com/creative/">
+  <meta property="og:site_name" content="LUCID CREATIVE · A DIVISION OF LUCID LABS LTD">
+  <meta property="og:image" content="https://lucidlabsltd.com/creative/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="LUCID CREATIVE — Fresh ad creative. Every week. On schedule.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lucid Creative — Fresh ad creative. Every week. On schedule.">
+  <meta name="twitter:description" content="Short-form, UGC and AI UGC video ads for DTC brands. Claim a free spec cut: three new hooks in 72 hours.">
+  <meta name="twitter:image" content="https://lucidlabsltd.com/creative/social-card.png">
+  <meta name="twitter:image:alt" content="LUCID CREATIVE — Fresh ad creative. Every week. On schedule.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0ebdd;
+      --surface: #e9e3d2;
+      --surface-2: #dfd8c4;
+      --ink: #26221a;
+      --muted: #6e675a;
+      --accent: #9a5b00;
+      --line: #d5cdb8;
+      --mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --wrap: 1120px;
+      --gutter: 1.5rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    ::selection { background: var(--accent); color: var(--bg); }
+    a { color: var(--accent); }
+    a:focus-visible, button:focus-visible, video:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    h1, h2, h3, .mono, .label, .chip, .btn, nav { font-family: var(--mono); }
+    .wrap { width: min(var(--wrap), 100%); margin: 0 auto; padding: 0 var(--gutter); }
+    .skip { position: absolute; left: -999px; top: 0; }
+    .skip:focus { left: 1rem; top: 1rem; z-index: 50; background: var(--ink); color: var(--bg); padding: 0.5rem 0.8rem; }
+
+    /* ── nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 64px; }
+    .brand { display: flex; align-items: center; gap: 0.65rem; color: var(--ink); text-decoration: none; min-width: 0; }
+    .brand svg { width: 30px; height: 30px; flex-shrink: 0; }
+    .brand .name { font-weight: 800; letter-spacing: 0.08em; font-size: 0.95rem; line-height: 1.15; white-space: nowrap; }
+    .brand .sub { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); white-space: nowrap; }
+    .nav-links { display: flex; align-items: center; gap: 1.4rem; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-links a { color: var(--muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      min-height: 48px; padding: 0.75rem 1.3rem;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; text-align: center;
+      border: 1.5px solid var(--ink);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+    .btn-ghost:hover { border-color: var(--ink); }
+    .nav-links .btn { min-height: 38px; padding: 0.45rem 0.9rem; font-size: 0.7rem; color: var(--bg); }
+    .nav-links .btn:hover { color: #fff; }
+
+    /* ── shared ── */
+    .label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.9rem; }
+    .label b { color: var(--accent); font-weight: 700; }
+    section { padding: 4.5rem 0 0; scroll-margin-top: 72px; }
+    .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem 1.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 0.8rem; margin-bottom: 1.8rem; }
+    .sec-head .num { font-size: 0.72rem; letter-spacing: 0.14em; color: var(--accent); font-weight: 700; margin-right: 0.8rem; }
+    h2 { font-size: clamp(1.25rem, 2.6vw, 1.7rem); letter-spacing: 0.04em; text-transform: uppercase; margin: 0; font-weight: 800; line-height: 1.2; }
+    .sec-head .aside { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .lede { max-width: 62ch; color: var(--muted); margin: -0.6rem 0 1.8rem; }
+
+    /* ── hero ── */
+    .hero { padding: 3.5rem 0 0; display: grid; grid-template-columns: 1.55fr 1fr; gap: 3rem; align-items: end; }
+    h1 { font-size: clamp(2rem, 5.2vw, 3.6rem); line-height: 1.06; letter-spacing: 0.01em; text-transform: uppercase; font-weight: 800; margin: 0 0 1.4rem; text-wrap: balance; }
+    h1 em { font-style: normal; color: var(--accent); }
+    .hero p.sub { font-size: 1.1rem; max-width: 54ch; margin: 0 0 1.8rem; }
+    .cta-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .offer-card { border: 1.5px solid var(--accent); background: var(--surface); padding: 1.4rem 1.5rem; }
+    .chip { display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 0.2rem 0.55rem; }
+    .offer-card h2 { font-size: 1.1rem; margin: 0.8rem 0 0.2rem; }
+    .offer-card .price { font-family: var(--mono); font-size: 2.2rem; font-weight: 800; line-height: 1.1; }
+    .offer-card p { margin: 0.6rem 0 0; font-size: 0.95rem; }
+    .offer-card ul { margin: 0.8rem 0 0; }
+
+    ul.plus, ul.arrow { list-style: none; padding: 0; margin: 0; }
+    ul.plus li, ul.arrow li { position: relative; padding-left: 1.2rem; margin-top: 0.35rem; font-size: 0.95rem; }
+    ul.plus li::before, ul.arrow li::before { position: absolute; left: 0; font-family: var(--mono); font-weight: 700; color: var(--accent); }
+    ul.plus li::before { content: "+"; }
+    ul.arrow li::before { content: ">"; }
+
+    /* ── work grid ── */
+    .filters[hidden] { display: none; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.4rem; }
+    .filters button {
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      min-height: 40px; padding: 0.4rem 0.85rem; cursor: pointer;
+      background: transparent; color: var(--muted); border: 1px solid var(--line);
+    }
+    .filters button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); background: var(--surface); }
+    .work-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; }
+    .clip { margin: 0; min-width: 0; }
+    .clip[hidden] { display: none; }
+    .clip .yt, .clip iframe {
+      display: block; width: 100%; height: auto; aspect-ratio: 9 / 16;
+      background: var(--ink); border: 1px solid var(--line); padding: 0; margin: 0;
+    }
+    .clip .yt { position: relative; cursor: pointer; overflow: hidden; }
+    .clip .yt img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .clip .yt .play {
+      position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px;
+      border-radius: 50%; background: rgba(38, 34, 26, 0.78); border: 2px solid rgba(240, 235, 221, 0.9);
+      transition: transform 0.15s, background 0.15s;
+    }
+    .clip .yt .play::after {
+      content: ""; position: absolute; left: 25px; top: 19px;
+      border-style: solid; border-width: 12px 0 12px 19px; border-color: transparent transparent transparent #f0ebdd;
+    }
+    .clip .yt:hover .play, .clip .yt:focus-visible .play { background: var(--accent); transform: scale(1.06); }
+    .clip .yt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .clip figcaption { padding: 0.6rem 0.1rem 0; }
+    .clip .cat { display: block; font-family: var(--mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .clip .title { display: block; font-size: 0.92rem; line-height: 1.35; margin-top: 0.15rem; }
+    .work-note { font-size: 0.85rem; color: var(--muted); margin: 1.2rem 0 0; }
+
+    /* ── why ── */
+    .why { display: grid; grid-template-columns: 1.15fr 1fr; gap: 2.5rem; padding: 1.8rem 2rem; background: var(--surface); border: 1px solid var(--line); }
+    .why p { margin: 0 0 0.8rem; }
+    .why p:last-child { margin-bottom: 0; }
+    .why ul.arrow li { padding-top: 0.55rem; padding-bottom: 0.55rem; margin: 0; border-bottom: 1px solid var(--line); }
+    .why ul.arrow li::before { top: 0.55rem; }
+    .why ul.arrow li:last-child { border-bottom: 0; }
+
+    /* ── services ── */
+    .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .card { border: 1px solid var(--line); padding: 1.3rem 1.4rem; background: var(--bg); }
+    .card h3 { font-size: 0.86rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.45rem; }
+    .card p { margin: 0; font-size: 0.95rem; color: var(--muted); }
+
+    /* ── steps ── */
+    .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
+    .step { padding: 1.3rem 1.4rem; border-right: 1px solid var(--line); }
+    .step:last-child { border-right: 0; }
+    .step .n { font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); }
+    .step h3 { font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0.3rem 0 0.4rem; }
+    .step p { margin: 0; font-size: 0.95rem; color: var(--muted); }
+
+    /* ── offers ── */
+    .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .offer { border: 1px solid var(--line); background: var(--surface); padding: 1.5rem 1.6rem; display: flex; flex-direction: column; }
+    .offer.hl { border: 1.5px solid var(--accent); }
+    .offer h3 { font-size: 1.15rem; letter-spacing: 0.04em; text-transform: uppercase; margin: 0.8rem 0 0.1rem; }
+    .offer .price { font-family: var(--mono); font-size: 2rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.6rem; }
+    .offer .price small { font-size: 0.8rem; font-weight: 500; color: var(--muted); letter-spacing: 0.02em; }
+    .offer p { margin: 0 0 0.6rem; }
+    .offer .btn { margin-top: auto; align-self: flex-start; }
+    .offer ul { margin-bottom: 1.3rem; }
+
+    /* ── plans ── */
+    .plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .plan { border: 1px solid var(--line); padding: 1.4rem; display: flex; flex-direction: column; background: var(--bg); }
+    .plan h3 { font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0; }
+    .plan .vol { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.2rem; }
+    .plan .price { font-family: var(--mono); font-size: 1.75rem; font-weight: 800; margin: 0.9rem 0 0; line-height: 1.1; }
+    .plan .per { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 0.9rem; }
+    .plan p { margin: 0; padding-top: 0.9rem; border-top: 1px dashed var(--line); font-size: 0.92rem; }
+    .plan.single { background: var(--surface); }
+    .note { font-size: 0.85rem; color: var(--muted); margin: 1rem 0 0; }
+
+    .guarantee { margin-top: 1.6rem; display: grid; grid-template-columns: auto 1fr; gap: 1.6rem; align-items: center; padding: 1.2rem 1.5rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); background: var(--surface); }
+    .guarantee .g { font-family: var(--mono); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.3; }
+    .guarantee p { margin: 0; }
+
+    /* ── includes / team ── */
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .two h3.head { font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 0.8rem; }
+    .person { border-top: 1px solid var(--line); padding: 1rem 0; }
+    .person:last-child { border-bottom: 1px solid var(--line); }
+    .person .who { font-family: var(--mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .person .role { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .person p { margin: 0.35rem 0 0; font-size: 0.95rem; }
+
+    /* ── closing CTA ── */
+    .cta-band { margin-top: 4.5rem; background: var(--ink); color: var(--bg); }
+    .cta-band .wrap { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; padding-top: 3rem; padding-bottom: 3rem; }
+    .cta-band h2 { color: var(--bg); }
+    .cta-band p { margin: 0.6rem 0 0; color: #d5cdb8; max-width: 56ch; }
+    .cta-band .btn { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+    .cta-band .btn:hover { background: #e0a84a; border-color: #e0a84a; color: var(--ink); }
+    .cta-band .mail { display: block; margin-top: 0.7rem; font-family: var(--mono); font-size: 0.82rem; color: #e0a84a; text-align: center; overflow-wrap: anywhere; }
+
+    footer { border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem 1.5rem; flex-wrap: wrap; padding-top: 1.4rem; padding-bottom: 1.6rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--ink); }
+
+    /* ── responsive ── */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; gap: 2rem; }
+      .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .step:nth-child(2) { border-right: 0; }
+      .step:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+    @media (max-width: 760px) {
+      :root { --gutter: 1rem; }
+      .nav-links a:not(.btn) { display: none; }
+      .brand .sub { display: none; }
+      section { padding-top: 3.2rem; }
+      .hero { padding-top: 2.2rem; }
+      .hero .offer-card { display: none; } /* repeated in "Start without risk"; keeps the work near the top */
+      .hero p.sub { font-size: 1.02rem; }
+      .cta-row { flex-direction: column; }
+      .cta-row .btn { width: 100%; }
+      .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+      .why, .grid3, .offers, .two { grid-template-columns: 1fr; }
+      .why { gap: 1.2rem; padding: 1.3rem 1.2rem; }
+      .grid3 { gap: 0.7rem; }
+      .offer .btn { align-self: stretch; }
+      .two { gap: 2.2rem; }
+      .cta-band .wrap { grid-template-columns: 1fr; gap: 1.4rem; }
+      .cta-band .btn { width: 100%; }
+      .guarantee { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+    @media (max-width: 520px) {
+      .plans, .steps { grid-template-columns: 1fr; }
+      .step, .step:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--line); }
+      .step:last-child { border-bottom: 0; }
+      .nav-links .btn { padding: 0.45rem 0.7rem; }
+    }
+    @media (max-width: 360px) {
+      .brand .name { font-size: 0.82rem; letter-spacing: 0.05em; }
+      .brand svg { width: 24px; height: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+
+<nav aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="/creative/" aria-label="LUCID CREATIVE, a division of LUCID LABS LTD">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><polyline points="36,30 68,60 36,90" fill="none" stroke="#9A5B00" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><rect x="76" y="74" width="28" height="13" fill="#9A5B00"/></svg>
+      <span><span class="name">LUCID CREATIVE</span><br><span class="sub">A DIVISION OF LUCID LABS LTD</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#team">Team</a>
+      <a class="btn btn-primary" data-spec-cut href="mailto:francisca@lucidlabsltd.com">Free spec cut</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <p class="label"><b>Short-form video ads</b> · For DTC brands</p>
+        <h1>Fresh ad creative.<br>Every week. <em>On schedule.</em></h1>
+        <p class="sub">Lucid Creative edits short-form, UGC and AI UGC video ads for direct-to-consumer brands. You get a steady weekly supply of scroll-stopping ads, ready to launch, test and scale on Meta, TikTok and YouTube Shorts.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" data-spec-cut href="mailto:francisca@lucidlabsltd.com">Claim your free spec cut</a>
+          <a class="btn btn-ghost" href="#work">See the work ↓</a>
+        </div>
+      </div>
+      <aside class="offer-card" aria-label="Free spec cut offer">
+        <span class="chip">On us</span>
+        <h2>Free spec cut</h2>
+        <div class="price">$0</div>
+        <p>We re-cut one of your live ads into three new hook variations and deliver them within 72 hours.</p>
+        <ul class="plus">
+          <li>No call, contract or card required</li>
+          <li>Yours to run and keep, whatever you decide</li>
+        </ul>
+      </aside>
+    </header>
+
+    <!-- ── WORK ── -->
+    <section id="work" aria-labelledby="work-h">
+      <div class="sec-head">
+        <h2 id="work-h"><span class="num">01</span>The work</h2>
+        <span class="aside">Tap to play · sound on</span>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter samples by category" hidden></div>
+      <div class="work-grid" id="workGrid">
+        <!--
+          One <figure> per sample, health & wellness first. data-cat drives the filter buttons.
+          data-yt = the 11-character YouTube video ID. Posters live in /creative/posters/.
+          The video loads from youtube-nocookie.com only when the visitor taps play.
+        -->
+        <figure class="clip" data-cat="Health &amp; wellness">
+          <button class="yt" type="button" data-yt="Hx4BwW-WNWM" data-slug="health-heel-pain-ai-ugc" aria-label="Play: Heel-pain support, AI UGC testimonial"><img src="/creative/posters/health-heel-pain-ai-ugc.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Health &amp; wellness</span><span class="title">Heel-pain support · AI UGC testimonial</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Health &amp; wellness">
+          <button class="yt" type="button" data-yt="Djw0LhyAi3U" data-slug="health-hair-loss-clay" aria-label="Play: Hair-loss treatment, Clay animation"><img src="/creative/posters/health-hair-loss-clay.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Health &amp; wellness</span><span class="title">Hair-loss treatment · Clay animation</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Health &amp; wellness">
+          <button class="yt" type="button" data-yt="C-Vy6TN4qd4" data-slug="health-mens-tablet-3d" aria-label="Play: Men's health tablet, 3D animated story"><img src="/creative/posters/health-mens-tablet-3d.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Health &amp; wellness</span><span class="title">Men's health tablet · 3D animated story</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Pet supplements">
+          <button class="yt" type="button" data-yt="MqrwqbxnsA8" data-slug="pet-cat-kidney-ai-ugc" aria-label="Play: Cat kidney supplement, AI UGC story"><img src="/creative/posters/pet-cat-kidney-ai-ugc.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Pet supplements</span><span class="title">Cat kidney supplement · AI UGC story</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Pet supplements">
+          <button class="yt" type="button" data-yt="hdtnlH8kXME" data-slug="pet-cat-kidney-clay" aria-label="Play: Cat kidney supplement, Clay animation"><img src="/creative/posters/pet-cat-kidney-clay.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Pet supplements</span><span class="title">Cat kidney supplement · Clay animation</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Pet supplements">
+          <button class="yt" type="button" data-yt="eWG1trSBmJM" data-slug="pet-senior-cat-illustrated" aria-label="Play: Senior cat nutrition, Illustrated story"><img src="/creative/posters/pet-senior-cat-illustrated.webp" width="480" height="854" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Pet supplements</span><span class="title">Senior cat nutrition · Illustrated story</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Pet supplements">
+          <button class="yt" type="button" data-yt="jCCdYo8VHdE" data-slug="pet-dog-supplement-3d" aria-label="Play: Dog daily supplement, 3D animated story"><img src="/creative/posters/pet-dog-supplement-3d.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Pet supplements</span><span class="title">Dog daily supplement · 3D animated story</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Pet supplements">
+          <button class="yt" type="button" data-yt="bpFwyOISu68" data-slug="pet-cat-supplement-song" aria-label="Play: Cat supplement, Animated song ad"><img src="/creative/posters/pet-cat-supplement-song.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Pet supplements</span><span class="title">Cat supplement · Animated song ad</span></figcaption>
+        </figure>
+        <figure class="clip" data-cat="Pet supplements">
+          <button class="yt" type="button" data-yt="59n1ZTi3kZQ" data-slug="pet-cat-kidney-3d" aria-label="Play: Cat kidney support, 3D animated story"><img src="/creative/posters/pet-cat-kidney-3d.webp" width="540" height="960" loading="lazy" alt=""><span class="play" aria-hidden="true"></span></button>
+          <figcaption><span class="cat">Pet supplements</span><span class="title">Cat kidney support · 3D animated story</span></figcaption>
+        </figure>
+      </div>
+      <p class="work-note">Every ad is delivered in 9:16, with 4:5 and 1:1 cutdowns on the plans that include them.</p>
+    </section>
+
+    <!-- ── WHY ── -->
+    <section aria-labelledby="why-h">
+      <div class="why">
+        <div>
+          <h2 id="why-h" style="margin-bottom:0.9rem">Why brands bring us in</h2>
+          <p>Paid social runs on creative. Even a winning ad fades as the same audience sees it again, so the accounts that keep growing test new hooks, angles and formats every week.</p>
+          <p>Few in-house teams can edit at that pace. We become your creative engine, so your team stays focused on strategy, media and product.</p>
+        </div>
+        <ul class="arrow">
+          <li>New hooks on proven ads before they fade</li>
+          <li>Creator footage turned into finished, testable ads</li>
+          <li>One brief in, a full week of variations out</li>
+          <li>Every placement covered: 9:16, 4:5 and 1:1</li>
+          <li>One point of contact, one weekly delivery</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── SERVICES ── -->
+    <section id="services" aria-labelledby="services-h">
+      <div class="sec-head"><h2 id="services-h"><span class="num">02</span>What we make</h2></div>
+      <div class="grid3">
+        <div class="card"><h3>Performance ads</h3><p>Product and offer ads built around a hook, a reason to believe and a clear call to action.</p></div>
+        <div class="card"><h3>UGC ads</h3><p>Creator and customer footage shaped into native-feeling ads with captions, pacing and sound.</p></div>
+        <div class="card"><h3>AI UGC ads</h3><p>AI-assisted UGC-style ads from our own production pipeline, for testing new angles fast.</p></div>
+        <div class="card"><h3>Hook &amp; iteration packs</h3><p>New openings, edits and calls to action on ads that already work, to extend their life.</p></div>
+        <div class="card"><h3>Founder &amp; expert edits</h3><p>Talking-head footage cut into tight, credible ads with on-screen callouts and clean audio.</p></div>
+        <div class="card"><h3>Platform cutdowns</h3><p>Every ad resized, re-paced and safe-zoned for Reels, Stories, TikTok and Shorts.</p></div>
+      </div>
+    </section>
+
+    <!-- ── HOW ── -->
+    <section id="how" aria-labelledby="how-h">
+      <div class="sec-head"><h2 id="how-h"><span class="num">03</span>How it works</h2></div>
+      <div class="steps">
+        <div class="step"><div class="n">01</div><h3>Brief</h3><p>A 20-minute call. You share goals, approved claims, brand rules and footage.</p></div>
+        <div class="step"><div class="n">02</div><h3>First cuts</h3><p>First edits land within 72 hours of a complete brief.</p></div>
+        <div class="step"><div class="n">03</div><h3>Refine</h3><p>Two revision rounds per ad, with notes handled in one shared thread.</p></div>
+        <div class="step"><div class="n">04</div><h3>Ship weekly</h3><p>A batch every week: named, sized and captioned, ready to upload.</p></div>
+      </div>
+    </section>
+
+    <!-- ── START ── -->
+    <section id="start" aria-labelledby="start-h">
+      <div class="sec-head">
+        <h2 id="start-h"><span class="num">04</span>Start without risk</h2>
+        <span class="aside">Two ways to try us before you commit</span>
+      </div>
+      <div class="offers">
+        <div class="offer hl">
+          <span class="chip">On us</span>
+          <h3>Free spec cut</h3>
+          <div class="price">$0</div>
+          <p>We re-cut one of your live ads into three new hook variations and deliver them within 72 hours.</p>
+          <ul class="plus">
+            <li>No call, contract or card required</li>
+            <li>Yours to run and keep, whatever you decide</li>
+          </ul>
+          <a class="btn btn-primary" data-spec-cut href="mailto:francisca@lucidlabsltd.com">Claim your free spec cut</a>
+        </div>
+        <div class="offer">
+          <span class="chip">Best first step</span>
+          <h3>Two-week pilot</h3>
+          <div class="price">$950 <small>10 finished ads</small></div>
+          <p>Ten finished ads over two weeks, so you can judge our quality, speed and process on real work.</p>
+          <ul class="plus">
+            <li>Move to any monthly plan and the full $950 is credited to your first month</li>
+          </ul>
+          <a class="btn btn-ghost" href="mailto:francisca@lucidlabsltd.com?subject=Two-week%20pilot&amp;body=Hi%20Francisca%2C%0D%0A%0D%0AWe%27d%20like%20to%20talk%20about%20the%20two-week%20pilot.%0D%0A%0D%0ABrand%3A%20%0D%0AWebsite%3A%20%0D%0A">Ask about the pilot</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRICING ── -->
+    <section id="pricing" aria-labelledby="pricing-h">
+      <div class="sec-head"><h2 id="pricing-h"><span class="num">05</span>Monthly plans</h2></div>
+      <div class="plans">
+        <article class="plan">
+          <h3>Starter</h3>
+          <div class="vol">20 ads / month (5 a week)</div>
+          <div class="price">$1,900</div>
+          <div class="per">/ month · $95 per ad</div>
+          <p>Captions, music and sound design. 9:16 and 4:5. Two hook variations a week. Two revision rounds.</p>
+        </article>
+        <article class="plan">
+          <h3>Growth</h3>
+          <div class="vol">40 ads / month (10 a week)</div>
+          <div class="price">$3,400</div>
+          <div class="per">/ month · $85 per ad</div>
+          <p>Everything in Starter, plus UGC and AI UGC ads, 1:1 cutdowns, two hooks per concept and priority turnaround.</p>
+        </article>
+        <article class="plan">
+          <h3>Scale</h3>
+          <div class="vol">80 ads / month (20 a week)</div>
+          <div class="price">$6,000</div>
+          <div class="per">/ month · $75 per ad</div>
+          <p>Everything in Growth, plus three hooks per concept, three revision rounds and a weekly creative planning call.</p>
+        </article>
+        <article class="plan single">
+          <h3>Single ad</h3>
+          <div class="vol">One ad</div>
+          <div class="price">$150</div>
+          <div class="per">per ad</div>
+          <p>One edit up to 60 seconds in 9:16 with captions, music and sound design. Two revision rounds.</p>
+        </article>
+      </div>
+      <p class="note">Billed every four weeks, month to month. Custom volume on request. Scope and price are confirmed in writing first.</p>
+      <div class="guarantee">
+        <div class="g">Our<br>guarantee</div>
+        <p><strong>Love your first batch, or we re-cut it free.</strong> If it still isn't right after the re-cut, you don't pay for that batch.</p>
+      </div>
+    </section>
+
+    <!-- ── INCLUDES + TEAM ── -->
+    <section id="team" aria-labelledby="team-h">
+      <div class="sec-head"><h2 id="team-h"><span class="num">06</span>Who you'll work with</h2></div>
+      <div class="two">
+        <div>
+          <div class="person"><div class="who">Francisca</div><div class="role">Client lead</div><p>Your single point of contact for briefs, feedback and billing.</p></div>
+          <div class="person"><div class="who">Emmanuel</div><div class="role">Lead editor</div><p>Seven years editing product ads, UGC, promos and interviews. Designs sound in-house and leads our AI UGC pipeline.</p></div>
+        </div>
+        <div>
+          <h3 class="head">Every engagement includes</h3>
+          <ul class="arrow">
+            <li>Full ownership of every final file</li>
+            <li>Month-to-month terms with no long-term lock-in</li>
+            <li>Claims-aware editing: we work only from your approved copy</li>
+            <li>Upload-ready files: named, captioned and safe-zoned</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── CLOSING CTA ── -->
+  <section class="cta-band" id="contact" aria-labelledby="cta-h">
+    <div class="wrap">
+      <div>
+        <h2 id="cta-h">Claim your free spec cut</h2>
+        <p>Tell us which live ad to start from. Three new hooks will be in your inbox within 72 hours.</p>
+      </div>
+      <div>
+        <a class="btn" data-spec-cut href="mailto:francisca@lucidlabsltd.com">Claim your free spec cut</a>
+        <a class="mail" href="mailto:francisca@lucidlabsltd.com">francisca@lucidlabsltd.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>LUCID CREATIVE · A DIVISION OF <a href="/">LUCID LABS LTD</a></span>
+    <span><a href="mailto:francisca@lucidlabsltd.com">francisca@lucidlabsltd.com</a></span>
+    <span>© 2026 LUCID LABS LTD</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // One mailto for every "free spec cut" button, with a pre-filled brief.
+  var body = "Hi Francisca,\r\n\r\nWe'd like a free spec cut.\r\n\r\nBrand: \r\nWebsite: \r\nLive ad to start from (link): \r\n";
+  var href = "mailto:francisca@lucidlabsltd.com?subject=" + encodeURIComponent("Free spec cut") + "&body=" + encodeURIComponent(body);
+  document.querySelectorAll("[data-spec-cut]").forEach(function (a) { a.href = href; });
+
+  // Click-to-load YouTube: nothing from YouTube loads until a visitor taps play,
+  // and only one sample plays at a time (opening one restores the others' posters).
+  var grid = document.getElementById("workGrid");
+  function closePlayers(except) {
+    grid.querySelectorAll("iframe").forEach(function (f) {
+      if (f !== except && f._facade) f.replaceWith(f._facade);
+    });
+  }
+  grid.addEventListener("click", function (e) {
+    var btn = e.target.closest(".yt");
+    if (!btn) return;
+    var id = btn.getAttribute("data-yt");
+    if (!/^[\w-]{11}$/.test(id)) return;
+    var f = document.createElement("iframe");
+    f.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
+    f.title = btn.getAttribute("aria-label").replace(/^Play: /, "");
+    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    f.allowFullscreen = true;
+    f._facade = btn;
+    btn.replaceWith(f);
+    closePlayers(f);
+    f.focus();
+  });
+
+  // Category filters, built from the samples (shown only when 2+ categories exist).
+  var clips = Array.prototype.slice.call(grid.querySelectorAll(".clip"));
+  var cats = [];
+  clips.forEach(function (c) { var k = c.getAttribute("data-cat"); if (k && cats.indexOf(k) < 0) cats.push(k); });
+  if (cats.length < 2) return;
+  var bar = document.getElementById("filters");
+  ["All"].concat(cats).forEach(function (k, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = k;
+    b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+    b.addEventListener("click", function () {
+      bar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      clips.forEach(function (c) {
+        var show = k === "All" || c.getAttribute("data-cat") === k;
+        c.hidden = !show;
+        if (!show) { var f = c.querySelector("iframe"); if (f && f._facade) f.replaceWith(f._facade); }
+      });
+    });
+    bar.appendChild(b);
+  });
+  bar.hidden = false;
+})();
+</script>
+</body>
+</html>

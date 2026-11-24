@@ -1,0 +1,4 @@
+# Sample videos are hosted on YouTube; never commit video files to the site.
+website/**/*.mp4
+website/**/*.mov
+website/**/*.webm
